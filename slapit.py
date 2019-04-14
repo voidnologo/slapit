@@ -36,7 +36,12 @@ def say(args):
 
 def get(args):
     client = get_client()
-    messages = client.statuses.home_timeline(count=args.count, tweet_mode='extended')
+    if args.user:
+        messages = client.statuses.user_timeline(
+            screen_name=args.user, count=args.count, tweet_mode='extended'
+        )
+    else:
+        messages = client.statuses.home_timeline(count=args.count, tweet_mode='extended')
     indent = ' ' * 4
     for message in messages:
         print(f'{Fore.GREEN + message["user"]["name"]}    {message["created_at"]}')
@@ -81,6 +86,7 @@ parser_s.set_defaults(func=say)
 
 parser_g = subparsers.add_parser('get', aliases=['g'])
 parser_g.add_argument('count', type=int, default=5, nargs='?')
+parser_g.add_argument('-u', '--user', dest='user')
 parser_g.set_defaults(func=get)
 
 parser_t = subparsers.add_parser('tell', aliases=['t'])
