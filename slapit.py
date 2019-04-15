@@ -77,7 +77,7 @@ def tell(args):
     )
 
 
-parser = argparse.ArgumentParser(prog='Upload local file', formatter_class=argparse.RawDescriptionHelpFormatter)
+parser = argparse.ArgumentParser(prog='SlapIt', formatter_class=argparse.RawDescriptionHelpFormatter)
 subparsers = parser.add_subparsers()
 
 parser_s = subparsers.add_parser('say', aliases=['s'])
